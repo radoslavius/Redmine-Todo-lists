@@ -4,6 +4,8 @@
     <%= javascript_include_tag :"angular-resource.min.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :"angular-ui.sortable.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :"angular-ui.date.js", :plugin => 'redmine_todos' %>
+    <%= javascript_include_tag :"datepicker-cs.js", :plugin => 'redmine_todos' %>
+    <%= javascript_include_tag :"jquery.browserfix.js", :plugin => 'redmine_todos' %>
     <!--<%= javascript_include_tag :"jquery-ui.sortable.js", :plugin => 'redmine_todos' %>-->
     <%= javascript_include_tag :"jquery.textarea.expander.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :todos, :plugin => 'redmine_todos' %>
@@ -113,8 +115,8 @@
         update_todos: <%=User.current.allowed_to? :update_todos, @project%>,
         delete_todos: <%=User.current.allowed_to? :delete_todos, @project%>
     };
-    window.completed_todo_status = <%=@settings[:completed_todo_status].to_json.html_safe%>;
-    window.uncompleted_todo_status = <%=@settings[:uncompleted_todo_status].to_json.html_safe%>;
+    window.completed_todo_status = <%=@settings["completed_todo_status"].to_json.html_safe%>;
+    window.uncompleted_todo_status = <%=@settings["uncompleted_todo_status"].to_json.html_safe%>;
     window.comments_nbs = <%=@comments_nbs.to_json.html_safe%>
     window.routing = {
         show_issue: '<%= url_for :controller => 'issues', :action => 'show', :id => ':issue_id' %>',
