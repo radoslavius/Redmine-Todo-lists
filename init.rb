@@ -7,12 +7,12 @@ Redmine::Plugin.register :redmine_todos do
   name 'Redmine Todo Lists (Basecamp-like) plugin'
   author 'Adam Zieliński'
   description 'Basecamp-like to-do lists for your Redmine'
-  version '3.0.0'
+  version '3.4.0'
   url 'http://azielinski.info'
   author_url 'mailto:kontakt@azielinski'
 
-  requires_redmine :version_or_higher => '3.0.0'
-  
+  requires_redmine :version_or_higher => '3.4.0'
+
   settings :default => {
     :uncompleted_todo_status   => nil,
     :completed_todo_status => nil
