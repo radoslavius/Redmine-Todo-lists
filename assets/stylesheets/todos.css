@@ -2,7 +2,7 @@
   width: 31px;
   display: inline-block;
   text-indent: -10000px;
-  background: url("data:image/gif;base64,R0lGODlhEAALAPQAADrn9QAAADHG0i+9yDXU4QEFBQAAAAopLB12fRVXXCqpswceIBBDRx99hRZaYCustwgiJAADAxFGSzTR3THE0Dfd6wwyNjLI1Dfc6SmlrySRmi63wjbY5QAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA") center center no-repeat #ffffff !important;
+  background: url("data:image/gif;base64,R0lGODlhEAALAPQAADrn9QAAADHG0i+9yDXU4QEFBQAAAAopLB12fRVXXCqpswceIBBDRx99hRZaYCustwgiJAADAxFGSzTR3THE0Dfd6wwyNjLI1Dfc6SmlrySRmi63wjbY5QAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA") center center no-repeat #fff !important;
 }
 .ui-sortable-placeholder {
   background: #ddd;
@@ -85,7 +85,7 @@ due-assignee-pill > .pill .form .pointer {
   position: absolute;
   top: 20px;
   left: -15px;
-  border-right: 16px solid #eeeeee;
+  border-right: 16px solid #eee;
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
 }
@@ -93,7 +93,7 @@ due-assignee-pill > .pill .form .pointer div {
   position: absolute;
   top: -15px;
   left: 1px;
-  border-right: 15px solid #ffffff;
+  border-right: 15px solid #fff;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
 }
@@ -126,7 +126,7 @@ due-assignee-pill > .pill .form .ui-datepicker-inline {
   box-shadow: none;
 }
 .controller-todo_list #todos_container {
-  width: 80%;
+  width: 90%;
   float: left;
   padding-bottom: 80px;
 }
@@ -144,7 +144,7 @@ due-assignee-pill > .pill .form .ui-datepicker-inline {
   float: left;
   clear: both;
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
 }
 .controller-todo_list #todos_container > header .newTodoListForm > * > article {
   display: block;
@@ -179,7 +179,7 @@ due-assignee-pill > .pill .form .ui-datepicker-inline {
   float: left;
   clear: both;
   width: 100%;
-  max-width: 700px;
+  max-width: 900px;
   margin: 0;
   padding: 0;
   list-style-type: none;
@@ -209,7 +209,7 @@ due-assignee-pill > .pill .form .ui-datepicker-inline {
   background: #FFF;
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
-  box-shadow: -3px 0 3px #cccccc;
+  box-shadow: -3px 0 3px #ccc;
 }
 .controller-todo_list #todos_container ol.todo_lists > li .asideContainer aside .edit {
   display: inline-block;

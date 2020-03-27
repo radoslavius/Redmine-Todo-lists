@@ -11,6 +11,7 @@
     <%= javascript_include_tag :todos, :plugin => 'redmine_todos' %>
     <%= stylesheet_link_tag :todos, :plugin => 'redmine_todos' %>
 <% end %>
+<% statuses = IssueStatus.all().map do |status| [status.id, status.name] end %>
 
 <script type="text/ng-template" id="todoResourceEditForm.html">
   <article ng-show="isActive" ng-class="elementClass+(withCheckbox?' withCheckbox':'')">
@@ -60,6 +61,7 @@
             <span ng-show="!todoItem.due_date && !assignedToName()">{{ Translator.trans("unassigned") }}</span>
             <span ng-show="todoItem.due_date && assignedToName()">·</span>
             <span ng-show="assignedToName()">{{ assignedToName() }}</span>
+            - [#{{ todoItem.id }}] {{ statuses[todoItem.status_id] }}
         </span>
         <span ng-show="saveInProgress" class="indicator">
           Loading...
@@ -131,6 +133,7 @@
     window.csrfToken = jQuery('meta[name="csrf-token"]').attr("content");
     window.todoResourceEditFormTemplate = jQuery('script[id="todoResourceEditForm.html"]').html();
     window.dueAssigneePillTemplate = jQuery('script[id="dueAssigneePill.html"]').html();
+    var statuses = {<% for k,v in statuses %><%= k%>:"<%= v%>",<% end %>};
 </script>
 
 <div ng-app="redmine_todos" ng-controller="TodoListController" id="todos_container" ng-cloak>
@@ -217,7 +220,6 @@
 
                             <div class="todoContents">
                                 <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
-                                  <!--[#{{ todoItem.id }}]-->
                                   {{ todoItem.subject }}
                                 </a>
                                 <a class="pill" ng-show="todoItem.commentsNb" href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}"><span class="details hasData"><span>{{ todoItem.commentsNb }} comment{{ todoItem.commentsNb>1?'s':'' }}</span></span></a>

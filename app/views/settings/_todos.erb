@@ -24,6 +24,17 @@
 
 
 <p>
+  <label><%= l(:label_todo_list_closed_todo_status) %></label>
+  <select name="settings[closed_todo_status]">
+    <option>-- choose --</option>
+    <% for k,v in statuses %>
+        <option value="<%=k%>" <%= k.to_s == @settings["closed_todo_status"].to_s ? 'selected="true"':''%>><%=v%></option>
+    <% end %>
+  </select>
+</p>
+
+
+<p>
   <label><%= l(:label_todos_default_tracker) %></label>
   <select name="settings[default_tracker]">
     <option>-- choose --</option>

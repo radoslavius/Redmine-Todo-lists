@@ -1,5 +1,4 @@
 class TodoListController < ApplicationController
-  unloadable
 
   before_filter :find_settings
   before_filter :find_project
@@ -7,11 +6,9 @@ class TodoListController < ApplicationController
   before_filter :find_todo_list, :only => [:done, :update, :delete]
 
   def index
-    if not @settings.include? :completed_todo_status
-      @settings[:completed_todo_status] = -1
+    if not @settings.include? "completed_todo_status"
+      @settings["completed_todo_status"] = -1
     end
-    # @settings[:completed_todo_status]
-    # @settings[:uncompleted_todo_status]
     @assignable_users_json = @project.users.to_json(root: true, :only => [:id, :firstname, :lastname])
 
     todo_lists = TodoList.where(:project_id=>@project.id)
@@ -29,7 +26,7 @@ class TodoListController < ApplicationController
     todo_lists_ids = todo_lists.map { |tl| tl['id'] }
 
     TodoItem.joins(:issue)
-            .where('issues.status_id != ?', @settings[:completed_todo_status])
+            .where('issues.status_id != ? and issues.status_id != ?', @settings["completed_todo_status"], @settings["closed_todo_status"])
             .where('issues.is_private = false or issues.assigned_to_id = ? or issues.author_id = ?', User.current.id, User.current.id)
             .where('todo_items.todo_list_id in (?)', todo_lists_ids)
             .includes(:issue)
@@ -121,7 +118,7 @@ class TodoListController < ApplicationController
   end
 
   def find_settings
-    @settings = Setting[:plugin_redmine_todos]
+    @settings = Setting["plugin_redmine_todos"]
   end
 
   protected
@@ -165,7 +162,7 @@ class TodoListController < ApplicationController
                     select @curRow := 0, @curTLId := 0
                   ) r
                   LEFT JOIN issues on issues.id=todo_items.issue_id
-                  where issues.status_id = #{TodoItem.sanitize(@settings[:completed_todo_status])}
+                  where issues.status_id = #{TodoItem.sanitize(@settings["completed_todo_status"])}
                   order by todo_items.todo_list_id, completed_at desc
               ) a
               where rank < 4
@@ -179,7 +176,7 @@ class TodoListController < ApplicationController
                 select todo_items.*, issues.subject, issues.status_id, issues.assigned_to_id, issues.due_date, rank() over (partition by todo_list_id order by updated_at desc)
                 from todo_items
                 LEFT JOIN issues on issues.id=todo_items.issue_id
-                WHERE issues.status_id = #{TodoItem.sanitize(@settings[:completed_todo_status])}
+                WHERE issues.status_id = #{TodoItem.sanitize(@settings["completed_todo_status"])}
               ) AS ranked_items
               WHERE rank <= 2
               ORDER BY todo_list_id, completed_at desc

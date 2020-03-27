@@ -162,7 +162,8 @@ angular
                 scope.Translator = Translator;
                 scope.saveInProgress = false;
                 scope.isFormVisible = false;
-                scope.UsersManager = UsersManager
+                scope.UsersManager = UsersManager;
+                scope.statuses = $window.statuses;
 
                 scope.hasPerm = function(permName)
                 {
@@ -297,11 +298,11 @@ angular
 function TodoListController($scope, $window, $timeout, $filter, $http, $log, $resource, Translator, UsersManager, Registry)
 {
     window.scope = $scope; // just for easier debugging
-    
+
     function handleError(response)
     {
         alert(Translator.trans("label_ajax_error")+ " HTTP status: "+response.status+(response.data?", message:"+response.data.message:""));
-    };
+    }
 
     $scope.routes = $window.routing;
 
@@ -675,5 +676,4 @@ function TodoListController($scope, $window, $timeout, $filter, $http, $log, $re
     };
     // }}
 
-};
-
+}

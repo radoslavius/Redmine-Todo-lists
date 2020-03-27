@@ -1,5 +1,4 @@
 class TodoItemController < ApplicationController
-  unloadable
 
   before_filter :find_project
   before_filter :check_permissions
@@ -48,7 +47,7 @@ class TodoItemController < ApplicationController
         end
       end
     end
-    
+
     todo_item = TodoItem.new(:todo_list_id=> @todo_list.id)
     success = self.do_save(todo_item, @issue)
     render :json => {:success => success}.merge(todo_item.as_json)
