@@ -355,3 +355,6 @@ due-assignee-pill > .pill .form .ui-datepicker-inline {
   text-decoration: none;
   cursor: pointer;
 }
+.myIssue {
+  font-weight: bold;
+}
