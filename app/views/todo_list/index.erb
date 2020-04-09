@@ -61,7 +61,7 @@
             <span ng-show="!todoItem.due_date && !assignedToName()">{{ Translator.trans("unassigned") }}</span>
             <span ng-show="todoItem.due_date && assignedToName()">·</span>
             <span ng-show="assignedToName()">{{ assignedToName() }}</span>
-            - [#{{ todoItem.id }}] {{ statuses[todoItem.status_id] }}
+            - [#{{ todoItem.issue_id }}] {{ statuses[todoItem.status_id] }}
         </span>
         <span ng-show="saveInProgress" class="indicator">
           Loading...
@@ -220,7 +220,7 @@
 
                             <div class="todoContents">
                                 <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
-                                  {{ todoItem.subject }}
+                                  {{ todoItem.subject }} {{ todoItem.issue_id }}
                                 </a>
                                 <a class="pill" ng-show="todoItem.commentsNb" href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}"><span class="details hasData"><span>{{ todoItem.commentsNb }} comment{{ todoItem.commentsNb>1?'s':'' }}</span></span></a>
                                 <due-assignee-pill todo-item="todoItem"></due-assignee-pill>
@@ -240,8 +240,6 @@
                             on-cancel="setState('editingTodoItem', false)"
                             save-callback="updateTodo"></todo-resource-edit-form>
 
-                        <!--<a class="pill assignee inactive" href="#">Adam Zieliński</a>
-                        <a class="pill comments" href="#">13 <%= l(:label_comments_nb) %></a>-->
                     </li>
                 </ol>
 
@@ -269,7 +267,6 @@
                       <input type="checkbox" ng-click="toggleTodoItem(todoItem)" ng-model="todoItem.completed" />
 
                       <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
-                        <!--[#{{ todoItem.id }}]-->
                         {{ todoItem.subject }}
                       </a>
                       ({{ Translator.trans('completed_at') }} {{ todoItem.completed_at|date:"dd-MM-yyyy HH:mm" }})
