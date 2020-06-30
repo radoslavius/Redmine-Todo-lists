@@ -7,7 +7,7 @@ class TodoList < ActiveRecord::Base
              :dependent => :delete_all,
              :foreign_key => :todo_list_id
 
-  acts_as_list
+  acts_as_tree
   validates_presence_of :name
 
   def as_json(options=nil)
