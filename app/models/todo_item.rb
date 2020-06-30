@@ -4,7 +4,7 @@ class TodoItem < ActiveRecord::Base
   has_one    :issue, :primary_key => "issue_id", :foreign_key => "id"
   acts_as_tree
 
-  attr_accessible :todo_list_id
+  attr_accessor :todo_list_id
 
   def as_json(options=nil)
     {
