@@ -1,11 +1,11 @@
 class TodoItemController < ApplicationController
   unloadable
 
-  before_filter :find_project
-  before_filter :check_permissions
-  before_filter :find_todo_list, :only => :create
-  before_filter :find_todo_item, :only => [:toggle, :update, :delete]
-  before_filter :init_journal
+  before_action :find_project
+  before_action :check_permissions
+  before_action :find_todo_list, :only => :create
+  before_action :find_todo_item, :only => [:toggle, :update, :delete]
+  before_action :init_journal
 
   def create
     (render_403; return false) unless User.current.allowed_to?(:create_todos, @project)

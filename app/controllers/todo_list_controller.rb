@@ -1,10 +1,10 @@
 class TodoListController < ApplicationController
   unloadable
 
-  before_filter :find_settings
-  before_filter :find_project
-  before_filter :check_permissions
-  before_filter :find_todo_list, :only => [:done, :update, :delete]
+  before_action :find_settings
+  before_action :find_project
+  before_action :check_permissions
+  before_action :find_todo_list, :only => [:done, :update, :delete]
 
   def index
     if not @settings.include? :completed_todo_status
