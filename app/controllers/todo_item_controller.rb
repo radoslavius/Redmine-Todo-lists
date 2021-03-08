@@ -1,5 +1,4 @@
 class TodoItemController < ApplicationController
-  unloadable
 
   before_action :find_project
   before_action :check_permissions
@@ -10,14 +9,14 @@ class TodoItemController < ApplicationController
   def create
     (render_403; return false) unless User.current.allowed_to?(:create_todos, @project)
 
-    settings = Setting[:plugin_redmine_todos]
+    settings = Setting['plugin_redmine_todos']
 
-    if not settings.include? :default_tracker
-      settings[:default_tracker] = false
+    if not settings.include? 'default_tracker'
+      settings['default_tracker'] = false
     end
 
     begin
-      tracker = @project.trackers.find((params && params[:tracker_id]) || settings[:default_tracker] || :first)
+      tracker = @project.trackers.find((params && params[:tracker_id]) || settings['default_tracker'] || :first)
     rescue ActiveRecord::RecordNotFound
       return render :status=>500, :json => {:success => false, :message => l(:error_no_tracker_in_project_or_plugin) }
     end
@@ -26,7 +25,7 @@ class TodoItemController < ApplicationController
     @issue = Issue.new(
         :author_id => User.current.id,
         :subject => params[:subject_new],
-        :status_id => settings[:uncompleted_todo_status],
+        :status_id => settings['uncompleted_todo_status'],
         :due_date => params[:due_date_new],
         :is_private => (params[:is_private] || false) ? 1 : 0,
         :assigned_to_id => params[:assigned_to_id_new]
@@ -48,7 +47,7 @@ class TodoItemController < ApplicationController
         end
       end
     end
-    
+
     todo_item = TodoItem.new(:todo_list_id=> @todo_list.id)
     success = self.do_save(todo_item, @issue)
     render :json => {:success => success}.merge(todo_item.as_json)
@@ -84,8 +83,8 @@ class TodoItemController < ApplicationController
   def toggle
     (render_403; return false) unless User.current.allowed_to?(:update_todos, @project)
 
-    settings = Setting[:plugin_redmine_todos]
-    @todo_item.issue.status_id = params[:completed] ? settings[:completed_todo_status] : settings[:uncompleted_todo_status]
+    settings = Setting['plugin_redmine_todos']
+    @todo_item.issue.status_id = params[:completed] ? settings['completed_todo_status'] : settings['uncompleted_todo_status']
     @todo_item.completed_at = params[:completed] ? Time.now : nil
     return render :json => {
         :success => self.do_save(@todo_item),

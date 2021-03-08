@@ -1,5 +1,5 @@
 class TodoList < ActiveRecord::Base
-  unloadable
+
   belongs_to :author,     :class_name => "User",     :foreign_key => "author_id"
   belongs_to :project,    :class_name => "Project",  :foreign_key => "project_id"
   has_many   :todo_items,

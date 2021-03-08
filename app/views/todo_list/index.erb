@@ -4,11 +4,14 @@
     <%= javascript_include_tag :"angular-resource.min.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :"angular-ui.sortable.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :"angular-ui.date.js", :plugin => 'redmine_todos' %>
+    <%= javascript_include_tag :"datepicker-cs.js", :plugin => 'redmine_todos' %>
+    <%= javascript_include_tag :"jquery.browserfix.js", :plugin => 'redmine_todos' %>
     <!--<%= javascript_include_tag :"jquery-ui.sortable.js", :plugin => 'redmine_todos' %>-->
     <%= javascript_include_tag :"jquery.textarea.expander.js", :plugin => 'redmine_todos' %>
     <%= javascript_include_tag :todos, :plugin => 'redmine_todos' %>
     <%= stylesheet_link_tag :todos, :plugin => 'redmine_todos' %>
 <% end %>
+<% statuses = IssueStatus.all().map do |status| [status.id, status.name] end %>
 
 <script type="text/ng-template" id="todoResourceEditForm.html">
   <article ng-show="isActive" ng-class="elementClass+(withCheckbox?' withCheckbox':'')">
@@ -58,6 +61,7 @@
             <span ng-show="!todoItem.due_date && !assignedToName()">{{ Translator.trans("unassigned") }}</span>
             <span ng-show="todoItem.due_date && assignedToName()">·</span>
             <span ng-show="assignedToName()">{{ assignedToName() }}</span>
+            - [#{{ todoItem.issue_id }}] {{ statuses[todoItem.status_id] }}
         </span>
         <span ng-show="saveInProgress" class="indicator">
           Loading...
@@ -113,8 +117,8 @@
         update_todos: <%=User.current.allowed_to? :update_todos, @project%>,
         delete_todos: <%=User.current.allowed_to? :delete_todos, @project%>
     };
-    window.completed_todo_status = <%=@settings[:completed_todo_status].to_json.html_safe%>;
-    window.uncompleted_todo_status = <%=@settings[:uncompleted_todo_status].to_json.html_safe%>;
+    window.completed_todo_status = <%=@settings["completed_todo_status"].to_json.html_safe%>;
+    window.uncompleted_todo_status = <%=@settings["uncompleted_todo_status"].to_json.html_safe%>;
     window.comments_nbs = <%=@comments_nbs.to_json.html_safe%>
     window.routing = {
         show_issue: '<%= url_for :controller => 'issues', :action => 'show', :id => ':issue_id' %>',
@@ -129,6 +133,7 @@
     window.csrfToken = jQuery('meta[name="csrf-token"]').attr("content");
     window.todoResourceEditFormTemplate = jQuery('script[id="todoResourceEditForm.html"]').html();
     window.dueAssigneePillTemplate = jQuery('script[id="dueAssigneePill.html"]').html();
+    var statuses = {<% for k,v in statuses %><%= k%>:"<%= v%>",<% end %>};
 </script>
 
 <div ng-app="redmine_todos" ng-controller="TodoListController" id="todos_container" ng-cloak>
@@ -213,9 +218,8 @@
                         <span ng-hide="editingTodoItem == todoItem.id">
                             <input type="checkbox" ng-click="toggleTodoItem(todoItem)" ng-model="todoItem.completed" ng-disabled="{{ !permissions.update_todos }}" />
 
-                            <div class="todoContents">
+                            <div class="todoContents" ng-class="(todoItem.myIssue ? 'myIssue' : '')">
                                 <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
-                                  <!--[#{{ todoItem.id }}]-->
                                   {{ todoItem.subject }}
                                 </a>
                                 <a class="pill" ng-show="todoItem.commentsNb" href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}"><span class="details hasData"><span>{{ todoItem.commentsNb }} comment{{ todoItem.commentsNb>1?'s':'' }}</span></span></a>
@@ -236,8 +240,6 @@
                             on-cancel="setState('editingTodoItem', false)"
                             save-callback="updateTodo"></todo-resource-edit-form>
 
-                        <!--<a class="pill assignee inactive" href="#">Adam Zieliński</a>
-                        <a class="pill comments" href="#">13 <%= l(:label_comments_nb) %></a>-->
                     </li>
                 </ol>
 
@@ -265,7 +267,6 @@
                       <input type="checkbox" ng-click="toggleTodoItem(todoItem)" ng-model="todoItem.completed" />
 
                       <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
-                        <!--[#{{ todoItem.id }}]-->
                         {{ todoItem.subject }}
                       </a>
                       ({{ Translator.trans('completed_at') }} {{ todoItem.completed_at|date:"dd-MM-yyyy HH:mm" }})

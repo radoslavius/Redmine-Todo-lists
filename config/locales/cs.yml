@@ -1,0 +1,47 @@
+# English strings go here for Rails i18n
+cs:
+  project_module_todos_module: "Seznamy úkolů"
+
+  label_todo_plural: Seznamy úkolů
+  label_todo_list_plural: Seznam úkolů
+
+  label_add_todo_list: Přidat seznam úkolů
+  label_new_todo_list_input_placeholder: Dejte vašemu úkolu název
+  label_save_new_list: Uložte a začněte přidávat úkoly
+  label_or: nebo
+  label_cancel: Zrušit
+
+  label_edit: Upravit
+  label_delete: Smazat
+  label_save_changes: Uložit změny
+
+  label_add_a_todo: Přidat úkol
+  label_add_this_todo: Přidat tento úkol
+  label_add_new_todo_placeholder: Přidejte nový úkol
+  label_done_adding_todos: Skončil jsem s přidáváním úkolů
+
+  label_todo_list_uncompleted_todo_status: Uncompleted todo should be reflected by which issue status?
+  label_todo_list_completed_todo_status:   Completed todo should be reflected by which issue status?
+  label_todos_default_tracker:             Default tracker for each issue created by this plugin
+  error_no_tracker_in_project_or_plugin:   No tracker is associated to this project. Please check the Project settings AND also the plugin settings (admin -> plugins -> redmine to-do lists)
+
+  label_add_first_todo_list: Přidejte svůj první seznam úkolů!
+  label_configure_plugin:    Tento plugin musíte před použitím nakonfigurovat - přejděte na stránku admin> pluginy> Seznamy úkolů a vyberte své preference!
+
+  label_unassigned: Nepřiřazen
+  label_set_due_date: "Nastavit datum splnění"
+  label_no_due_date: "Bez datumu splnění"
+  label_assign_this_todo_to: "Přiřadit tento úkol"
+  label_completed_at: "Vyřešeno v"
+  label_ajax_error: "Je nám líto, při zpracování vaší žádosti došlo k chybě! Další podrobnosti najdete v protokolech konzoly nebo serveru prohlížeče nebo webriku."
+  label_insufficient_permissions: "K provedení této akce nemáte oprávnění"
+
+  label_make_this_todo_private: "Nastavit toto jako soukromé"
+
+  permission_view_todo_lists: "Zobrazit seznamy úkolů"
+  permission_create_todo_lists: "Vytvořit seznamy úkolů"
+  permission_update_todo_lists: "Aktualizovat seznamy úkolů"
+  permission_delete_todo_lists: "Smazat seznamy úkolů"
+  permission_create_todos: "Vytvoření úkolů"
+  permission_update_todos: "Aktualizovat úkoly"
+  permission_delete_todos: "Smazat úkoly"
