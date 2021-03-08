@@ -117,8 +117,8 @@
         update_todos: <%=User.current.allowed_to? :update_todos, @project%>,
         delete_todos: <%=User.current.allowed_to? :delete_todos, @project%>
     };
-    window.completed_todo_status = <%=@settings["completed_todo_status"].to_json.html_safe%>;
-    window.uncompleted_todo_status = <%=@settings["uncompleted_todo_status"].to_json.html_safe%>;
+    window.completed_todo_status = <%=@settings[:completed_todo_status].to_json.html_safe%>;
+    window.uncompleted_todo_status = <%=@settings[:uncompleted_todo_status].to_json.html_safe%>;
     window.comments_nbs = <%=@comments_nbs.to_json.html_safe%>
     window.routing = {
         show_issue: '<%= url_for :controller => 'issues', :action => 'show', :id => ':issue_id' %>',
@@ -218,8 +218,9 @@
                         <span ng-hide="editingTodoItem == todoItem.id">
                             <input type="checkbox" ng-click="toggleTodoItem(todoItem)" ng-model="todoItem.completed" ng-disabled="{{ !permissions.update_todos }}" />
 
-                            <div class="todoContents" ng-class="(todoItem.myIssue ? 'myIssue' : '')">
+                            <div class="todoContents" ng-class="(todoItem.my_issue ? 'myIssue' : '')">
                                 <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
+                                  <!--[#{{ todoItem.id }}]-->
                                   {{ todoItem.subject }}
                                 </a>
                                 <a class="pill" ng-show="todoItem.commentsNb" href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}"><span class="details hasData"><span>{{ todoItem.commentsNb }} comment{{ todoItem.commentsNb>1?'s':'' }}</span></span></a>
@@ -267,6 +268,7 @@
                       <input type="checkbox" ng-click="toggleTodoItem(todoItem)" ng-model="todoItem.completed" />
 
                       <a href="{{ routes.show_issue|resolve:{':issue_id': todoItem.issue_id} }}" ng-hide="todoItem.editMode.formVisible">
+                        <!--[#{{ todoItem.id }}]-->
                         {{ todoItem.subject }}
                       </a>
                       ({{ Translator.trans('completed_at') }} {{ todoItem.completed_at|date:"dd-MM-yyyy HH:mm" }})

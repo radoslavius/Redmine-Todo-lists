@@ -7,11 +7,11 @@ Redmine::Plugin.register :redmine_todos do
   name 'Redmine Todo Lists (Basecamp-like) plugin'
   author 'Adam Zieliński'
   description 'Basecamp-like to-do lists for your Redmine'
-  version '3.4.0'
+  version '4.1.0'
   url 'http://azielinski.info'
   author_url 'mailto:kontakt@azielinski'
 
-  requires_redmine :version_or_higher => '3.4.0'
+  requires_redmine :version_or_higher => '4.1.0'
 
   settings :default => {
     :uncompleted_todo_status   => nil,
@@ -38,13 +38,13 @@ Redmine::Plugin.register :redmine_todos do
          :todo_list  => :create,
      }
      permission :update_todos, {
-         :todo_item  => [:update, :todo_item]
+         :todo_item  => [:update, :toggle]
      }
      permission :delete_todos, {
          :todo_item  => :delete
      }
   end
 
-  menu :project_menu, :todos, {:controller => 'todo_list', :action => 'index'}, :caption => :label_todo_plural, :param => :project_id, :after => :issues
+  menu :project_menu, :todos, {:controller => 'todo_list', :action => 'index'}, :caption => :label_todo_plural, :param => :project_id
 
 end

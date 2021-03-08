@@ -1,4 +1,4 @@
-class CreateTodoLists < ActiveRecord::Migration
+class CreateTodoLists < ActiveRecord::Migration[4.2]
   def change
     create_table :todo_lists do |t|
       t.string :name

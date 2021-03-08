@@ -370,11 +370,10 @@ function TodoListController($scope, $window, $timeout, $filter, $http, $log, $re
             {
                 jQuery.merge(list.todo_items, $window.recentlyCompleted[list.id]);
             }
-
             list.todo_items = list.todo_items.map(function(item) {
                 item['commentsNb'] = $window.comments_nbs[item.id] || 0;
                 item['completed'] = $scope.isTodoCompleted(item);
-                item['myIssue'] = $window.user.id == item.assigned_to_id;
+                item['my_issue'] = $window.user.id == item.assigned_to_id;
                 if(item['completed_at'])
                 {
                     item['completed_at'] = (new Date(item['completed_at'])).getTime();

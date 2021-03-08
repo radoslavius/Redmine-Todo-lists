@@ -1,6 +1,6 @@
 class TodoItem < ActiveRecord::Base
-
-  belongs_to :todo_list, :polymorphic => false
+  unloadable
+  belongs_to :todo_list
   has_one    :issue, :primary_key => "issue_id", :foreign_key => "id"
   acts_as_tree
 
@@ -13,7 +13,7 @@ class TodoItem < ActiveRecord::Base
         :updated_at => self.updated_at,
         # :name => self.issue.subject,
         :issue_id => self.issue_id,
-        :todo_list_id => self.todo_list_id,
+        :todo_list_id => self.todo_list.id,
         :subject => self.issue.subject,
         :is_private => self.issue.is_private,
         :status_id => self.issue.status_id,
